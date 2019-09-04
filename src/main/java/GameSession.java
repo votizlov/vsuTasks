@@ -2,27 +2,38 @@ public class GameSession {
     private int sessionType;//0 PvP,2 PvE,3 EvE,1 online PvP
     private Board mainBoard;
     private boolean whomMove;
-    GameSession(int sessionType){
-        this.sessionType=sessionType;
+    private int winFlag;//0 nobody,1 white,2 black
+
+    GameSession(int sessionType) {
+        this.sessionType = sessionType;
         mainBoard = new Board();
-        if(sessionType>1){
+        winFlag = 0;
+        if (sessionType > 1) {
             //init AI
-            if(sessionType==3){
+            if (sessionType == 3) {
 //launch autoCheckers
             }
-        } else if(sessionType==1){
+        } else if (sessionType == 1) {
             //init NetworkService
         }
     }
-    public int makePlayerMove(Move move){//returns 0 if ok,1 wrong team, 2 invalid move
-return 0;
+
+    public int makeMove(Move move) {//human move, returns 0 if ok,1 wrong team, 2 invalid move
+
+        return 0;
     }
-    private void makeAIMove(){
+
+    public void makeMove() {//aiMove
 
     }
+
 
 
     public int[][] getMainBoardArr() {
         return mainBoard.getBoard();
+    }
+
+    public int getWinFlag() {
+        return winFlag;
     }
 }

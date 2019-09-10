@@ -12,6 +12,7 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ public class NetworkService {
     private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
+    private static NetworkService instance;
 
     /**
      * Global instance of the scopes required by this quickstart.
@@ -34,6 +36,7 @@ public class NetworkService {
 
     /**
      * Creates an authorized Credential object.
+     *
      * @param HTTP_TRANSPORT The network HTTP Transport.
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
@@ -59,12 +62,13 @@ public class NetworkService {
     /**
      * Prints the names and majors of students in a sample spreadsheet:
      * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+     * https://docs.google.com/spreadsheets/d/1v7vCZMqo8sIvBRmB40B2lq7TnVyeJhuhSO1SFaVptZo/edit?usp=sharing
      */
-    public static void init(String... args) throws IOException, GeneralSecurityException {
+    public static void main(String... args) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        final String spreadsheetId = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms";
-        final String range = "Class Data!A2:E";
+        final String spreadsheetId = "1v7vCZMqo8sIvBRmB40B2lq7TnVyeJhuhSO1SFaVptZo";
+        final String range = "A1:E3";//"Class Data!A2:E";
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
@@ -78,8 +82,24 @@ public class NetworkService {
             System.out.println("Name, Major");
             for (List row : values) {
                 // Print columns A and E, which correspond to indices 0 and 4.
-                System.out.printf("%s, %s\n", row.get(0), row.get(4));
+                //System.out.printf("%s, %s\n", row.get(0),row.get(1),row.get(2),row.get(3), row.get(4));
+                for (Object o : row) {
+                    System.out.print(o);
+                    System.out.print(" ");
+                }
+                System.out.println();
             }
         }
+    }
+
+    public void getMove() {
+
+    }
+
+    public static NetworkService getInstance() {
+        if (instance == null) {
+            instance = new NetworkService();
+        }
+        return instance;
     }
 }

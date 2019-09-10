@@ -19,14 +19,20 @@ public class GameSession {
     }
 
     public int makeMove(Move move) {//human move, returns 0 if ok,1 wrong team, 2 invalid move
+        if (move.checkValidTeam(whomMove)) {
+            return 1;
+        } else if (move.checkValidMove(mainBoard.getBoard())) {
+            return 2;
+        } else {
 
-        return 0;
+
+            return 0;
+        }
     }
 
     public void makeMove() {//aiMove
 
     }
-
 
 
     public int[][] getMainBoardArr() {

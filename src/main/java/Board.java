@@ -1,6 +1,7 @@
 public class Board {
     private int[][] board = null;
-    Board(){
+
+    Board() {
         board = new int[][]{{0, 3, 0, 3, 0, 3, 0, 3},//0 nothing, 1 white man, 2 white king, 3 black man, 4 black king
                 {3, 0, 3, 0, 3, 0, 3, 0},
                 {0, 3, 0, 3, 0, 3, 0, 3},

@@ -1,19 +1,19 @@
 public class GameSession {
-    private int sessionType;//0 PvP,2 PvE,3 EvE,1 online PvP
+    private SessionType sessionType;//0 PvP,2 PvE,3 EvE,1 online PvP
     private Board mainBoard;
     private boolean whomMove;
     private int winFlag;//0 nobody,1 white,2 black
 
-    GameSession(int sessionType) {
+    GameSession(SessionType sessionType) {
         this.sessionType = sessionType;
         mainBoard = new Board();
         winFlag = 0;
-        if (sessionType > 1) {
+        if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
-            if (sessionType == 3) {
-//launch autoCheckers
+            if (sessionType == SessionType.EVE) {
+                //launch autoCheckers
             }
-        } else if (sessionType == 1) {
+        } else if (sessionType == SessionType.ONLINE_PVP) {
             //init NetworkService
         }
     }
@@ -24,19 +24,12 @@ public class GameSession {
         } else if (move.checkValidMove(mainBoard.getBoard())) {
             return 2;
         } else {
-
-
             return 0;
         }
     }
 
     public void makeMove() {//aiMove
 
-    }
-
-
-    public int[][] getMainBoardArr() {
-        return mainBoard.getBoard();
     }
 
     public int getWinFlag() {

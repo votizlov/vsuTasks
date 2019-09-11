@@ -1,18 +1,19 @@
+import java.util.LinkedList;
+
 public class Board {
-    private int[][] board = null;
+    private LinkedList<Man> whiteMans = new LinkedList<>();
+    private LinkedList<King> whiteKings = new LinkedList<>();
+    private LinkedList<Man> blackMans = new LinkedList<>();
+    private LinkedList<King> blackKings = new LinkedList<>();
 
     Board() {
-        board = new int[][]{{0, 3, 0, 3, 0, 3, 0, 3},//0 nothing, 1 white man, 2 white king, 3 black man, 4 black king
-                {3, 0, 3, 0, 3, 0, 3, 0},
-                {0, 3, 0, 3, 0, 3, 0, 3},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1, 0, 1, 0},};
+        for(int i = 0;i<8;i++){
+            for(int j = 0;j<8;j++){
+
+            }
+            //заполнение доски
+        }
     }
 
-    public int[][] getBoard() {
-        return board;
-    }
+
 }

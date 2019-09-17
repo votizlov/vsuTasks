@@ -4,21 +4,17 @@ public class Board {
     private Checker[][] field;
 
     Board() {
+        field = new Checker[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-
+                field[i][j] = new Checker();
             }
             //заполнение доски
         }
     }
 
 
-    public boolean attemptMove(Move move, boolean whomMove) throws WrongMoveException {
-        if (move.getChecker1().getTeam() != whomMove) {
-            throw new WrongMoveException("Wrong team");
-        }
-        if (!move.getChecker1().checkMove(move)) {
-            throw new WrongMoveException("Wrong move");
-        }
+    public void move(Move move) {
+
     }
 }

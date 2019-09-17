@@ -23,7 +23,7 @@ public class CheckersDrawer {
         canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-
+                mouseEvent.getX();
             }
         });
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();

@@ -1,4 +1,0 @@
-@Deprecated
-public interface Figure {
-
-}

@@ -23,20 +23,6 @@ public class GameSession {
         }
     }
 
-    public void makeMove(Move move) throws WrongMoveException {
-        if(mainBoard.attemptMove(move, whomMove)){
-            checkersDrawer.updateBoard();
-        }
-    }
-
-    public void makeMove() {//aiMove
-
-    }
-
-    public void pick(){
-
-    }
-
     public int getWinFlag() {
         return winFlag;
     }

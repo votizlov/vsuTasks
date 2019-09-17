@@ -1,8 +1,13 @@
-public class Checker extends Board {
+import java.util.LinkedList;
+
+public class Checker {
     private FigureType type;
     private Boolean team;//true white, false black
-    Checker(){}
-    Checker(FigureType type){
+
+    Checker() {
+    }
+
+    Checker(FigureType type) {
         this.type = type;
     }
 
@@ -15,11 +20,16 @@ public class Checker extends Board {
     }
 
     public boolean checkMove(Move move) {
-        if(type == FigureType.MAN){
-            
+        return getAvailableMoves().contains(move);
+    }
+
+    public LinkedList<Move> getAvailableMoves(){
+        LinkedList<Move> moves = new LinkedList<>();
+        if (type == FigureType.MAN) {
+
         } else {
 
         }
-        return false;
+        return moves;
     }
 }

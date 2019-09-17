@@ -4,18 +4,8 @@ public class Main {
 
     public static void main(String... args) {
         Scanner scanner = new Scanner(System.in);
-        GameSession currentSession = new GameSession(0);
-        while (currentSession.getWinFlag() == 0) {
-            if (scanner.hasNextInt()) {
-                int x1 = scanner.nextInt();
-                int y1 = scanner.nextInt();
-                int x2 = scanner.nextInt();
-                int y2 = scanner.nextInt();
-                currentSession.makeMove(new Move(x1, y1, x2, y2));
-            } else {
-                currentSession.makeMove();
-            }
-        }
+        GameSession currentSession = new GameSession(SessionType.PVE);
+
         if (currentSession.getWinFlag() == 1) {
             System.out.println("White wins");
         } else {

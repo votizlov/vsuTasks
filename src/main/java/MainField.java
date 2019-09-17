@@ -1,5 +1,3 @@
-package drawLogic;
-
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;

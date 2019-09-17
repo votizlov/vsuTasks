@@ -27,12 +27,5 @@ public class Move {
         return y2;
     }
 
-    public boolean checkValidTeam(boolean whomMove) {
-        return false;
-    }
-
-    public boolean checkValidMove(int[][] board) {
-        return false;
-    }
 
 }

@@ -1,5 +1,5 @@
 public class GameSession {
-    private SessionType sessionType;//0 PvP,2 PvE,3 EvE,1 online PvP
+    private SessionType sessionType;
     private Board mainBoard;
     private boolean whomMove;
     private int winFlag;//0 nobody,1 white,2 black
@@ -18,13 +18,11 @@ public class GameSession {
         }
     }
 
-    public int makeMove(Move move) {//human move, returns 0 if ok,1 wrong team, 2 invalid move
-        if (move.checkValidTeam(whomMove)) {
-            return 1;
-        } else if (move.checkValidMove(mainBoard.getBoard())) {
-            return 2;
+    public void makeMove(Move move) throws WrongMoveException {
+        if (mainBoard.checkValidMove(whomMove)) {
+
         } else {
-            return 0;
+            throw new WrongMoveException("Wrong move");
         }
     }
 

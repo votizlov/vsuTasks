@@ -1,13 +1,13 @@
 import java.util.LinkedList;
 
-public class Checker {
+public class Figure {
     private FigureType type;
     private Boolean team;//true white, false black
 
-    Checker() {
+    Figure() {
     }
 
-    Checker(FigureType type) {
+    Figure(FigureType type) {
         this.type = type;
     }
 

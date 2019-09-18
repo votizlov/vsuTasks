@@ -3,6 +3,8 @@ public class Move {
     private int x2;
     private int y1;
     private int y2;
+    private int deadX = -1;
+    private int deadY = -1;
 
     Move(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
@@ -11,6 +13,10 @@ public class Move {
         this.y2 = y2;
     }
 
+    public void addDead(int x,int y){
+        this.deadX = x;
+        this.deadY = y;
+    }
 
     public int getX1() {
         return x1;
@@ -29,4 +35,11 @@ public class Move {
     }
 
 
+    public int getDeadX() {
+        return deadX;
+    }
+
+    public int getDeadY() {
+        return deadY;
+    }
 }

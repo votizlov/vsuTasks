@@ -5,14 +5,13 @@ public class GameSession {
     private Board mainBoard;
     private boolean whomMove;
     private CheckersDrawer checkersDrawer;
-    private int winFlag;//0 nobody,1 white,2 black
+    private int winFlag;//0 nobody,1 white,2 blac
 
     GameSession(SessionType sessionType) {
         this.sessionType = sessionType;
-        mainBoard = new Board();
+        mainBoard = new Board(this);
         winFlag = 0;
         checkersDrawer = new CheckersDrawer(this);
-        checkersDrawer.drawBoard();
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
             if (sessionType == SessionType.EVE) {
@@ -25,5 +24,9 @@ public class GameSession {
 
     public int getWinFlag() {
         return winFlag;
+    }
+
+    public boolean isWhomMove() {
+        return whomMove;
     }
 }

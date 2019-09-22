@@ -9,9 +9,11 @@ public class GameSession {
 
     GameSession(SessionType sessionType) {
         this.sessionType = sessionType;
-        mainBoard = new Board(this);
+        //mainBoard = new Board(this);
         winFlag = 0;
-        checkersDrawer = new CheckersDrawer(this);
+        checkersDrawer = CheckersDrawer.getInstance(this);
+        checkersDrawer.drawBoard();
+
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
             if (sessionType == SessionType.EVE) {

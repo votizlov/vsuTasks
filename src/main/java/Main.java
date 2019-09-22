@@ -34,24 +34,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Checkers");
-        Group root = new Group();
-        Canvas canvas = new Canvas(FIELD_WIDTH, FIELD_HEIGHT);
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                mouseEvent.getX();
-            }
-        });
-        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        Rectangle r = new Rectangle();
-        r.setHeight(FIELD_HEIGHT / 8);
-        r.setWidth(FIELD_WIDTH / 8);
-        r.setX(0);
-        r.setY(0);
-        //r.setStroke(new Paint(Color.CYAN));
-        root.getChildren().add(canvas);
-        stage.setScene(new Scene(root));
-        stage.show();
+        CheckersDrawer.init(stage);
     }
 }

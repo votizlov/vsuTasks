@@ -13,6 +13,7 @@ public class GameSession {
         winFlag = 0;
         checkersDrawer = CheckersDrawer.getInstance(this);
         checkersDrawer.drawBoard();
+        //create controller w/ link to board
 
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI

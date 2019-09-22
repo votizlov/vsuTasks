@@ -17,11 +17,11 @@ public class Board {
         }
     }
 
-    public boolean makeHumanMove(Move move) throws WrongMoveException{
+    public BoardState makeHumanMove(Move move) throws WrongMoveException{
          if(field[move.getX1()][move.getY1()].getTeam()!=gameSession.isWhomMove()){
              throw new WrongMoveException("Wrong team");
          }
-         if(!findMoves(move.getX1(),move.getY1()).contains(move)){
+         if(!findMoves(move.getX1(),move.getY1()).contains(move)){ //if figures in the way + valid move check
              throw new WrongMoveException("Wrong move");
          }
          if(isKillAvailable&&move.getDeadX()<0){
@@ -31,7 +31,13 @@ public class Board {
          if(move.getDeadX()>=0){
              removeChecker(move.getDeadX(),move.getDeadY());
          }
-         return true;
+         BoardState boardState = new BoardState("gay");
+         return boardState;
+    }
+
+    public BoardState makeAIMove(){
+        BoardState boardState = new BoardState("gay");
+        return boardState;
     }
 
     private void move(Move move){
@@ -44,7 +50,7 @@ public class Board {
         field[x][y]=null;
     }
 
-    public LinkedList<Move> findMoves(int x,int y){
+    public LinkedList<Move> findMoves(int x,int y){//эта хуйня в классе фигуры
         LinkedList<Move> moves = new LinkedList<>();
         if(field[x][y].getType()==FigureType.MAN){
 

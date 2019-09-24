@@ -8,12 +8,13 @@ public class GameSession {
     private int winFlag;//0 nobody,1 white,2 blac
 
     GameSession(SessionType sessionType) {
-        this.sessionType = sessionType;
-        //mainBoard = new Board(this);
+        this.sessionType = SessionType.PVP;
+        mainBoard = new Board(this);
         winFlag = 0;
-        checkersDrawer = CheckersDrawer.getInstance(this);
-        checkersDrawer.drawBoard();
+        //checkersDrawer = CheckersDrawer.getInstance(this);
+        //checkersDrawer.drawBoard();
         //create controller w/ link to board
+        ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard);
 
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
@@ -23,6 +24,15 @@ public class GameSession {
         } else if (sessionType == SessionType.ONLINE_PVP) {
             //init NetworkService
         }
+        BoardState boardState = null;
+        do {
+            try {
+                boardState = mainBoard.makeHumanMove(consoleInterface.getInput());
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            }
+        } while (boardState==null||boardState.whoWins==Winners.NOONE);
+        consoleInterface.print(boardState.whoWins.toString());
     }
 
     public int getWinFlag() {

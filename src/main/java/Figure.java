@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public class Figure {
+public class Figure<T extends FigureInterface> {
     private FigureType type;
     private Boolean team;//true white, false black
 

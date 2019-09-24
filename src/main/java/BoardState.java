@@ -1,8 +1,8 @@
 public class BoardState {
     boolean whomMove;
-    boolean whoWins;
+    Winners whoWins;
     String errorMessage;
-    BoardState(boolean whomMove, boolean whoWins){
+    BoardState(boolean whomMove, Winners whoWins){
         this.whomMove = whomMove;
         this.whoWins = whoWins;
     }

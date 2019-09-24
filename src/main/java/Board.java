@@ -11,7 +11,7 @@ public class Board {
         field = new Figure[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                field[i][j] = new Figure();
+                field[i][j] = new Figure<Man>();
             }
             //заполнение доски
         }
@@ -31,11 +31,12 @@ public class Board {
          if(move.getDeadX()>=0){
              removeChecker(move.getDeadX(),move.getDeadY());
          }
+         //if move with this figure still available lock figure and dont change
          BoardState boardState = new BoardState("gay");
          return boardState;
     }
 
-    public BoardState makeAIMove(){
+    public BoardState makeAIMove(Move move){
         BoardState boardState = new BoardState("gay");
         return boardState;
     }

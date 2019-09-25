@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
 public class ConsoleInterface {
-    Board board;
+    Figure[][] board;
     Scanner scanner;
 
-    ConsoleInterface(Board board) {
+    ConsoleInterface(Figure[][] board) {
         this.board = board;
         this.scanner = new Scanner(System.in);
     }
 
-    public Move getInput() {//тут бля без цикла
+    public Move getInput() {
         BoardState boardState = null;
         return new Move(scanner.nextInt(),scanner.nextInt(),scanner.nextInt(),scanner.nextInt());
     }
@@ -19,6 +19,10 @@ public class ConsoleInterface {
     }
 
     public void drawBoard(boolean side) {
-
+        for (int i=0;i<board.length+2;i++){
+            for(int j=0;j<board[0].length+2;j++){
+                //drawing
+            }
+        }
     }
 }

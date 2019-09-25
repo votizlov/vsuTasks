@@ -1,35 +1,26 @@
 import java.util.LinkedList;
 
 public class Figure<T extends FigureInterface> {
-    private FigureType type;
     private Boolean team;//true white, false black
+    private T figure;
 
     Figure() {
     }
 
-    Figure(FigureType type) {
-        this.type = type;
+    Figure(T type) {
+        this.figure = type;
     }
 
-    public FigureType getType() {
-        return type;
+    public T getType() {
+        return figure;
     }
 
     public Boolean getTeam() {
         return team;
     }
 
-    public boolean checkMove(Move move) {
-        return getAvailableMoves().contains(move);
-    }
-
-    public LinkedList<Move> getAvailableMoves(){
+    public LinkedList<Move> getAvailableMoves(Figure[][] board){
         LinkedList<Move> moves = new LinkedList<>();
-        if (type == FigureType.MAN) {
-
-        } else {
-
-        }
-        return moves;
+        return figure.getAvailableMoves(board);
     }
 }

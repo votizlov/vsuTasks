@@ -1,13 +1,15 @@
 import java.util.LinkedList;
 
 public class Board {
+    public Figure[][] getField() {
+        return field;
+    }
+
     private Figure[][] field;
-    private GameSession gameSession;
     private boolean isKillAvailable = false;
     private Figure lockedFigure = null;
 
-    Board(GameSession gameSession) {
-        this.gameSession = gameSession;
+    Board() {
         field = new Figure[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -18,10 +20,10 @@ public class Board {
     }
 
     public BoardState makeHumanMove(Move move) throws WrongMoveException{
-         if(field[move.getX1()][move.getY1()].getTeam()!=gameSession.isWhomMove()){
+         if(field[move.getX1()][move.getY1()].getTeam()!=move.isWhomMove()){
              throw new WrongMoveException("Wrong team");
          }
-         if(!findMoves(move.getX1(),move.getY1()).contains(move)){ //if figures in the way + valid move check
+         if(field[move.getX1()][move.getY1()].getAvailableMoves().contains(move)){ //if figures in the way + valid move check
              throw new WrongMoveException("Wrong move");
          }
          if(isKillAvailable&&move.getDeadX()<0){
@@ -51,13 +53,4 @@ public class Board {
         field[x][y]=null;
     }
 
-    public LinkedList<Move> findMoves(int x,int y){//эта хуйня в классе фигуры
-        LinkedList<Move> moves = new LinkedList<>();
-        if(field[x][y].getType()==FigureType.MAN){
-
-        } else {
-
-        }
-        return moves;
-    }
 }

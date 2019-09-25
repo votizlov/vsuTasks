@@ -9,12 +9,9 @@ public class GameSession {
 
     GameSession(SessionType sessionType) {
         this.sessionType = SessionType.PVP;
-        mainBoard = new Board(this);
+        mainBoard = new Board();
         winFlag = 0;
-        //checkersDrawer = CheckersDrawer.getInstance(this);
-        //checkersDrawer.drawBoard();
-        //create controller w/ link to board
-        ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard);
+        ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard.getField());
 
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
@@ -27,7 +24,8 @@ public class GameSession {
         BoardState boardState = null;
         do {
             try {
-                boardState = mainBoard.makeHumanMove(consoleInterface.getInput());
+                boardState = mainBoard.makeHumanMove(consoleInterface.getInput().setWhomMove(whomMove));
+                whomMove=!whomMove;
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             }

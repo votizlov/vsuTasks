@@ -5,6 +5,7 @@ public class Move {
     private int y2;
     private int deadX = -1;
     private int deadY = -1;
+    private boolean isWhomMove;
 
     Move(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
@@ -41,5 +42,14 @@ public class Move {
 
     public int getDeadY() {
         return deadY;
+    }
+
+    public boolean isWhomMove() {
+        return isWhomMove;
+    }
+
+    public Move setWhomMove(boolean whomMove) {
+        isWhomMove = whomMove;
+        return this;
     }
 }

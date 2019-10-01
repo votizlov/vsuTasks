@@ -1,8 +1,9 @@
 import java.util.LinkedList;
 
-public class King implements FigureInterface {
+public class King implements Figure {
     private int x;
     private int y;
+    private boolean color;
 
     King() {
     }
@@ -20,5 +21,10 @@ public class King implements FigureInterface {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean getColor() {
+        return color;
     }
 }

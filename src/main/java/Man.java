@@ -1,8 +1,9 @@
 import java.util.LinkedList;
 
-public class Man implements FigureInterface {
+public class Man implements Figure {
     private int x;
     private int y;
+    private boolean color;
 
     Man() {
     }
@@ -29,5 +30,10 @@ public class Man implements FigureInterface {
         }
 
         return linkedList;
+    }
+
+    @Override
+    public boolean getColor() {
+        return color;
     }
 }

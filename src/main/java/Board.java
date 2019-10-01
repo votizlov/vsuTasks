@@ -13,7 +13,7 @@ public class Board {
         field = new Figure[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                field[i][j] = new Figure<Man>();
+                field[i][j] = new Man();
             }
             //заполнение доски
         }

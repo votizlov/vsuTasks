@@ -1,29 +1,35 @@
+import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Board {
-    public Figure[][] getField() {
+    public Square[] getField() {
         return field;
     }
 
-    private Figure[][] field;
+    private Square[] field;
     private boolean isKillAvailable = false;
     private Figure lockedFigure = null;
+    private Figure[] moveProcessors;
 
     Board() {
-        field = new Figure[8][8];
+        field = new Square[32];
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                field[i][j] = new Man();
+            for (int j = 0; j < 4; j++) {
+                if(i<4||i>5) {
+                    field[i * 4 + j] = new Square(new Man());
+                } else {
+                    field[i * 4 + j] = new Square();
+                }
             }
-            //заполнение доски
         }
     }
 
     public BoardState makeHumanMove(Move move) throws WrongMoveException {
-        if (field[move.getX1()][move.getY1()].getTeam() != move.isWhomMove()) {
+        if (field[move.getX1()].getFigure().getColor() != move.isWhomMove()) {
             throw new WrongMoveException("Wrong team");
         }
-        if (field[move.getX1()][move.getY1()].getAvailableMoves().contains(move)) { //if figures in the way + valid move check
+        if (field[move.getX1()].getFigure().getAvailableMoves(field[move.getX1()]).contains(move)) { //if figures in the way + valid move check
             throw new WrongMoveException("Wrong move");
         }
         if (isKillAvailable && move.getDeadX() < 0) {
@@ -44,13 +50,14 @@ public class Board {
     }
 
     private void move(Move move) {
-        Figure temp = field[move.getX1()][move.getY1()];
-        field[move.getX1()][move.getY1()] = null;
-        field[move.getX2()][move.getY2()] = temp;
+        Figure temp = field[move.getX1()].getFigure();
+        field[move.getX1()].setFigure(null);
+        field[move.getX2()].setFigure(temp);
     }
 
     private void removeChecker(int x, int y) {
-        field[x][y] = null;
+        field[x].setFigure(null);
     }
+
 
 }

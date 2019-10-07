@@ -1,3 +1,7 @@
+package mainLogic;
+
+import figures.Figure;
+
 public class Square {
     private Square upperLeft;
     private Square upperRight;

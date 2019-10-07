@@ -1,9 +1,11 @@
+package interfaceControllers;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import mainLogic.GameSession;
 
 public class CheckersDrawer {
     private GameSession currentSession;
@@ -39,4 +41,5 @@ public class CheckersDrawer {
     public void updateBoard() {
 
     }
+
 }

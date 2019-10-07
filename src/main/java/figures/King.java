@@ -1,12 +1,15 @@
+package figures;
+
+import mainLogic.Move;
+import mainLogic.Square;
+
 import java.util.LinkedList;
 
 public class King extends Figure {
     private boolean color;
 
-    King() {
-    }
-
-    King(int x, int y) {
+    public King(boolean color) {
+        this.color = color;
     }
 
     @Override

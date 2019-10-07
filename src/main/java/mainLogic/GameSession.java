@@ -12,7 +12,7 @@ public class GameSession {
 
     GameSession(SessionType sessionType) {
         this.sessionType = SessionType.PVP;
-        mainBoard = new Board();
+        mainBoard = new Board(8, 8);
         winFlag = 0;
         ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard.getField());
 
@@ -28,19 +28,12 @@ public class GameSession {
         do {
             try {
                 boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove));
-                whomMove=!whomMove;
+                if (!boardState.suspendPlayerChange)//change player if needed
+                    whomMove = !whomMove;
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             }
-        } while (boardState==null||boardState.whoWins==Winners.NOONE);
+        } while (boardState == null || boardState.whoWins == Winners.NOONE);
         consoleInterface.print(boardState.whoWins.toString());
-    }
-
-    public int getWinFlag() {
-        return winFlag;
-    }
-
-    public boolean isWhomMove() {
-        return whomMove;
     }
 }

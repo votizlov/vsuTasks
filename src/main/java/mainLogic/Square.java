@@ -37,4 +37,12 @@ public class Square {
     public void setFigure(Figure figure) {
         this.figure = figure;
     }
+
+    public char getSymbol() {
+        if(figure==null){
+            return 0;
+        } else {
+            return figure.getSymbol();
+        }
+    }
 }

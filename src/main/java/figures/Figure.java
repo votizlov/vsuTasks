@@ -5,12 +5,8 @@ import mainLogic.Square;
 
 import java.util.LinkedList;
 
-public class Figure {
-    private boolean color;//TODO make figure superclass
-    public LinkedList<Move> getAvailableMoves(Square square){
-        return null;
-    }
-    public boolean getColor(){
-        return false;
-    }
+public interface Figure {
+    public LinkedList<Move> getAvailableMoves(Square square);
+    public boolean getColor();
+    public char getSymbol();
 }

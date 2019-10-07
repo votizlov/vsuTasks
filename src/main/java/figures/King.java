@@ -5,7 +5,7 @@ import mainLogic.Square;
 
 import java.util.LinkedList;
 
-public class King extends Figure {
+public class King implements Figure {
     private boolean color;
 
     public King(boolean color) {
@@ -21,5 +21,14 @@ public class King extends Figure {
     @Override
     public boolean getColor() {
         return color;
+    }
+
+    @Override
+    public char getSymbol() {
+        if(color) {
+            return '1';
+        } else {
+            return 'I';
+        }
     }
 }

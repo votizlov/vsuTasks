@@ -1,6 +1,7 @@
-import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.LinkedList;
+package mainLogic;
+
+import figures.Figure;
+import figures.Man;
 
 public class Board {
     public Square[] getField() {
@@ -16,8 +17,8 @@ public class Board {
         field = new Square[32];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 4; j++) {
-                if(i<4||i>5) {
-                    field[i * 4 + j] = new Square(new Man());
+                if (i < 4 || i > 5) {
+                    field[i * 4 + j] = new Square(new Man(false));
                 } else {
                     field[i * 4 + j] = new Square();
                 }
@@ -26,21 +27,26 @@ public class Board {
     }
 
     public BoardState makeHumanMove(Move move) throws WrongMoveException {
-        if (field[move.getX1()].getFigure().getColor() != move.isWhomMove()) {
+        if (move.getS1().getFigure().getColor() != move.isWhomMove()) {
             throw new WrongMoveException("Wrong team");
         }
-        if (field[move.getX1()].getFigure().getAvailableMoves(field[move.getX1()]).contains(move)) { //if figures in the way + valid move check
+        if (move.getS1().getFigure().getAvailableMoves(move.getS1()).contains(move)) { //if figures in the way + valid move check
             throw new WrongMoveException("Wrong move");
         }
-        if (isKillAvailable && move.getDeadX() < 0) {
+        if (isKillAvailable() && move.getKilledFigureSquare() == null) {
             throw new WrongMoveException("You must kill");
         }
         move(move);
-        if (move.getDeadX() >= 0) {
-            removeChecker(move.getDeadX(), move.getDeadY());
+        if (move.getKilledFigureSquare() != null) {
+            removeChecker(move.getKilledFigureSquare());
+        }
+        BoardState boardState = null;
+        if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
+            boardState = new BoardState("gay");
+        } else {
+            boardState = new BoardState("gay");
         }
         //if move with this figure still available lock figure and dont change
-        BoardState boardState = new BoardState("gay");
         return boardState;
     }
 
@@ -50,14 +56,16 @@ public class Board {
     }
 
     private void move(Move move) {
-        Figure temp = field[move.getX1()].getFigure();
-        field[move.getX1()].setFigure(null);
-        field[move.getX2()].setFigure(temp);
+        Figure temp = move.getS1().getFigure();
+        move.getS1().setFigure(null);
+        move.getS2().setFigure(temp);
     }
 
-    private void removeChecker(int x, int y) {
-        field[x].setFigure(null);
+    private void removeChecker(Square square) {
+        square.setFigure(null);
     }
 
-
+    private boolean isKillAvailable() {
+        return false;
+    }
 }

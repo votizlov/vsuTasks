@@ -1,3 +1,5 @@
+package mainLogic;
+
 public class AI {
     private Board currentBoard;
     private boolean currentSide;

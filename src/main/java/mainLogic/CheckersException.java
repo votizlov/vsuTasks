@@ -1,3 +1,5 @@
+package mainLogic;
+
 class WrongMoveException extends Exception {
     public WrongMoveException() {
         super();

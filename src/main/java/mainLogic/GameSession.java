@@ -1,4 +1,7 @@
-import com.sun.scenario.effect.impl.state.AccessHelper;
+package mainLogic;
+
+import interfaceControllers.CheckersDrawer;
+import interfaceControllers.ConsoleInterface;
 
 public class GameSession {
     private SessionType sessionType;
@@ -24,7 +27,7 @@ public class GameSession {
         BoardState boardState = null;
         do {
             try {
-                boardState = mainBoard.makeHumanMove(consoleInterface.getInput().setWhomMove(whomMove));
+                boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove));
                 whomMove=!whomMove;
             } catch (WrongMoveException e) {
                 e.printStackTrace();

@@ -1,3 +1,5 @@
+package mainLogic;
+
 public class BoardState {
     boolean whomMove;
     Winners whoWins;

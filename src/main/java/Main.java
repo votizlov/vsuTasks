@@ -1,6 +1,8 @@
+import interfaceControllers.CheckersDrawer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main extends Application {
@@ -11,7 +13,10 @@ public class Main extends Application {
     public static void main(String... args) {
         Scanner scanner = new Scanner(System.in);
         //GameSession currentSession = new GameSession(SessionType.PVE);
-        launch(args);
+
+        System.out.print("BBB");
+        System.out.print("\r f");
+        //launch(args);
     }
 
     public void printArr(int[][] arr) {

@@ -1,11 +1,11 @@
 package mainLogic;
 
 public class BoardState {
-    boolean whomMove;
+    boolean suspendPlayerChange;
     Winners whoWins;
     String errorMessage;
-    BoardState(boolean whomMove, Winners whoWins){
-        this.whomMove = whomMove;
+    BoardState(boolean suspendPlayerChange, Winners whoWins){
+        this.suspendPlayerChange = suspendPlayerChange;
         this.whoWins = whoWins;
     }
     BoardState(String errorMessage){this.errorMessage = errorMessage;}

@@ -2,6 +2,8 @@ package mainLogic;
 
 import figures.Figure;
 
+import java.awt.*;
+
 public class Square {
     private Square upperLeft;
     private Square upperRight;
@@ -9,10 +11,13 @@ public class Square {
     private Square lowerRight;
     private Figure figure;
 
-    Square(Figure figure){
+    Square(Figure figure) {
         this.figure = figure;
     }
-    Square(){}
+
+    Square() {
+        this.figure = null;
+    }
 
     public Square getUpperLeft() {
         return upperLeft;
@@ -36,5 +41,37 @@ public class Square {
 
     public void setFigure(Figure figure) {
         this.figure = figure;
+    }
+
+    public char getSymbol() {
+        if (figure == null) {
+            return '-';
+        } else {
+            return figure.getSymbol();
+        }
+    }
+
+    public void setUpperLeft(Square upperLeft) {
+        this.upperLeft = upperLeft;
+    }
+
+    public void setUpperRight(Square upperRight) {
+        this.upperRight = upperRight;
+    }
+
+    public void setLowerLeft(Square lowerLeft) {
+        this.lowerLeft = lowerLeft;
+    }
+
+    public void setLowerRight(Square lowerRight) {
+        this.lowerRight = lowerRight;
+    }
+
+    public Color getColor() {
+        if(figure ==null){
+            return Color.GRAY;
+        } else {
+            return figure.getDrawable();
+        }
     }
 }

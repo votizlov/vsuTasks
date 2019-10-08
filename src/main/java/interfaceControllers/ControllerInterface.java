@@ -4,6 +4,6 @@ import mainLogic.Move;
 
 public interface ControllerInterface {
     void drawBoard(boolean side);
-    void updateBoard();
+    void updateBoard(boolean side);
     Move parseMove();
 }

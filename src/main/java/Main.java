@@ -1,4 +1,4 @@
-import interfaceControllers.CheckersDrawer;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import mainLogic.GameSession;
@@ -32,6 +32,5 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        CheckersDrawer.init(stage);
     }
 }

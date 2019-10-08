@@ -3,6 +3,7 @@ package figures;
 import mainLogic.Move;
 import mainLogic.Square;
 
+import java.awt.*;
 import java.util.LinkedList;
 
 public class King implements Figure {
@@ -19,8 +20,13 @@ public class King implements Figure {
     }
 
     @Override
-    public boolean getColor() {
+    public boolean getTeam() {
         return color;
+    }
+
+    @Override
+    public Color getDrawable() {
+        return null;
     }
 
     @Override

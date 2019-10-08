@@ -1,13 +1,12 @@
 package mainLogic;
 
-import interfaceControllers.CheckersDrawer;
+import interfaceControllers.CheckersInterface;
 import interfaceControllers.ConsoleInterface;
 
 public class GameSession {
     private SessionType sessionType;
     private Board mainBoard;
     private boolean whomMove;
-    private CheckersDrawer checkersDrawer;
     private int winFlag;//0 nobody,1 white,2 blac
 
     public GameSession(SessionType sessionType) {
@@ -15,7 +14,8 @@ public class GameSession {
         mainBoard = new Board(8, 8);
         winFlag = 0;
         ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard.getField());
-
+        CheckersInterface checkersInterface = new CheckersInterface(mainBoard.getField());
+        checkersInterface.drawBoard(true);
         if (sessionType == SessionType.PVE || sessionType == SessionType.EVE) {
             //init AI
             if (sessionType == SessionType.EVE) {

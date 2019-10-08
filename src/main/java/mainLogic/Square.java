@@ -2,6 +2,8 @@ package mainLogic;
 
 import figures.Figure;
 
+import java.awt.*;
+
 public class Square {
     private Square upperLeft;
     private Square upperRight;
@@ -63,5 +65,13 @@ public class Square {
 
     public void setLowerRight(Square lowerRight) {
         this.lowerRight = lowerRight;
+    }
+
+    public Color getColor() {
+        if(figure ==null){
+            return Color.GRAY;
+        } else {
+            return figure.getDrawable();
+        }
     }
 }

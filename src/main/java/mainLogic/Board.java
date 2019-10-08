@@ -57,7 +57,7 @@ public class Board {
         if (move.getS1() == null || move.getS2() == null) {
             throw new WrongMoveException("Wrong move");
         }
-        if (move.getS1().getFigure().getColor() == move.isWhomMove()) {
+        if (move.getS1().getFigure().getTeam() == move.isWhomMove()) {
             throw new WrongMoveException("Wrong team");
         }
         if (move.getS1().getFigure().getAvailableMoves(move.getS1()).contains(move)) { //if figures in the way + valid move check

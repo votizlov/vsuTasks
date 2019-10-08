@@ -34,6 +34,7 @@ public class ConsoleInterface implements ControllerInterface {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
+                //todo mb change
                 sb.append(board[i][j].getSymbol());
             }
             sb.append("\n");
@@ -42,13 +43,14 @@ public class ConsoleInterface implements ControllerInterface {
     }
 
     @Override
-    public void updateBoard() {
-
+    public void updateBoard(boolean side) {
+        drawBoard(side);
     }
 
     @Override
     public Move parseMove() {
+        System.out.println("MOVE");
         String[] coordinates = scanner.nextLine().split(" ");
-        return new Move(stringSquareHashMap.get(coordinates[0]), stringSquareHashMap.get(coordinates[1]));
+        return new Move(stringSquareHashMap.get(coordinates[0] + " " + coordinates[1]), stringSquareHashMap.get(coordinates[2] + " " + coordinates[3]));
     }
 }

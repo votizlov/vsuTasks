@@ -13,29 +13,43 @@ public class Board {
     private Square lockedSquare = null;
     private Figure[] moveProcessors;
 
-    Board(int x,int y) {
+    Board(int x, int y) {
         moveProcessors = new Figure[]{new Man(true), new Man(false), new King(true), new King(false)};
         field = new Square[x][y];
-        boolean placeFlag = false;
-        for (Square[] a : field
-        ) {
-            for (Square s : a
-            ) {
-                if(placeFlag)
-                    s = new Square();
-                placeFlag = !placeFlag;
-            }
-        }//todo make links or delete that shit
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
-                if (i < 4) {
+                field[i][j] = new Square();
+            }
+        }
+        boolean placeFlag = false;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field[0].length; j++) {
+                createLinks(field[i][j], i, j);
+                if (i < 3 && placeFlag) {
                     field[i][j] = new Square(moveProcessors[0]);
-                } else if (i > 5) {
+                } else if (i > 4 && placeFlag) {
                     field[i][j] = new Square(moveProcessors[1]);
                 } else {
                     field[i][j] = new Square();
                 }
+                placeFlag = !placeFlag;
             }
+            placeFlag = !placeFlag;
+        }
+    }
+
+    private void createLinks(Square square, int i, int j) {
+        if (i - 1 > 0 && j - 1 > 0) {
+            square.setUpperLeft(field[i - 1][j - 1]);
+        }
+        if (i + 1 < field.length && j - 1 > 0) {
+            square.setUpperLeft(field[i + 1][j - 1]);
+        }
+        if (i - 1 > 0 && j + 1 < field[0].length) {
+            square.setUpperLeft(field[i - 1][j + 1]);
+        }
+        if (i + 1 < field.length && j + 1 < field[0].length) {
+            square.setUpperLeft(field[i + 1][j + 1]);
         }
     }
 
@@ -43,7 +57,7 @@ public class Board {
         if (move.getS1() == null || move.getS2() == null) {
             throw new WrongMoveException("Wrong move");
         }
-        if (move.getS1().getFigure().getColor() != move.isWhomMove()) {
+        if (move.getS1().getFigure().getColor() == move.isWhomMove()) {
             throw new WrongMoveException("Wrong team");
         }
         if (move.getS1().getFigure().getAvailableMoves(move.getS1()).contains(move)) { //if figures in the way + valid move check

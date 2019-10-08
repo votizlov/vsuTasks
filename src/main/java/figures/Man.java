@@ -18,7 +18,7 @@ public class Man implements Figure {
         if (square.getUpperLeft()!=null){
             if(square.getUpperLeft().getFigure()==null){
                 linkedList.add(new Move(square,square.getUpperLeft()));
-            } else if(square.getUpperLeft().getUpperLeft().getFigure().getColor()!=this.color&&square.getUpperLeft().getUpperLeft().getFigure()==null){
+            } else if(square.getUpperLeft().getUpperLeft()!=null&&square.getUpperLeft().getUpperLeft().getFigure().getColor()!=this.color&&square.getUpperLeft().getUpperLeft().getFigure()==null){
                 linkedList.add(new Move(square,square.getUpperLeft().getUpperLeft(),square.getUpperLeft()));
             }
         }

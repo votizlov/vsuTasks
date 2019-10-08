@@ -9,10 +9,13 @@ public class Square {
     private Square lowerRight;
     private Figure figure;
 
-    Square(Figure figure){
+    Square(Figure figure) {
         this.figure = figure;
     }
-    Square(){}
+
+    Square() {
+        this.figure = null;
+    }
 
     public Square getUpperLeft() {
         return upperLeft;
@@ -39,10 +42,26 @@ public class Square {
     }
 
     public char getSymbol() {
-        if(figure==null){
-            return 0;
+        if (figure == null) {
+            return '-';
         } else {
             return figure.getSymbol();
         }
+    }
+
+    public void setUpperLeft(Square upperLeft) {
+        this.upperLeft = upperLeft;
+    }
+
+    public void setUpperRight(Square upperRight) {
+        this.upperRight = upperRight;
+    }
+
+    public void setLowerLeft(Square lowerLeft) {
+        this.lowerLeft = lowerLeft;
+    }
+
+    public void setLowerRight(Square lowerRight) {
+        this.lowerRight = lowerRight;
     }
 }

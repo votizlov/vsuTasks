@@ -10,7 +10,7 @@ public class GameSession {
     private CheckersDrawer checkersDrawer;
     private int winFlag;//0 nobody,1 white,2 blac
 
-    GameSession(SessionType sessionType) {
+    public GameSession(SessionType sessionType) {
         this.sessionType = SessionType.PVP;
         mainBoard = new Board(8, 8);
         winFlag = 0;
@@ -25,11 +25,13 @@ public class GameSession {
             //init NetworkService
         }
         BoardState boardState = null;
+        consoleInterface.drawBoard(true);
         do {
             try {
                 boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove));
                 if (!boardState.suspendPlayerChange)//change player if needed
                     whomMove = !whomMove;
+                consoleInterface.drawBoard(whomMove);
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             }

@@ -1,6 +1,6 @@
 package mainLogic;
 
-public enum Winners {
+public enum Players {
     WHITE,
     BLACK,
     NOONE

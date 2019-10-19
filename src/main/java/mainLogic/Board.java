@@ -70,12 +70,12 @@ public class Board {
         if (move.getKilledFigureSquare() != null) {
             removeChecker(move.getKilledFigureSquare());
             if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
-                return new BoardState(true, Winners.NOONE);
+                return new BoardState(true, Players.NOONE);
             } else {
-                return new BoardState(false, Winners.NOONE);
+                return new BoardState(false, Players.NOONE);
             }
         }
-        return new BoardState(false, Winners.NOONE);//if move with this figure still available lock figure and dont change
+        return new BoardState(false, Players.NOONE);//if move with this figure still available lock figure and dont change
     }
 
     public BoardState makeAIMove(Move move) {

@@ -17,36 +17,47 @@ public class King implements Figure {
     @Override
     public LinkedList<Move> getAvailableMoves(Square square) {
         LinkedList<Move> linkedList = new LinkedList<>();
-        if (square.getUpperLeft() != null) {
+        Square t = square.getUpperLeft();
+        while (t != null) {
             if (square.getUpperLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getUpperLeft()));
             } else if (square.getUpperLeft().getUpperLeft() != null && square.getUpperLeft().getUpperLeft().getFigure().getTeam() != this.color && square.getUpperLeft().getUpperLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getUpperLeft().getUpperLeft(), square.getUpperLeft()));
+                break;
             }
+            t = t.getUpperLeft();
         }
-
-        if (square.getUpperRight() != null) {
+        t = square.getUpperRight();
+        while (t != null) {
             if (square.getUpperRight().getFigure() == null) {
                 linkedList.add(new Move(square, square.getUpperRight()));
             } else if (square.getUpperRight().getUpperRight().getFigure().getTeam() != this.color && square.getUpperRight().getUpperRight().getFigure() == null) {
                 linkedList.add(new Move(square, square.getUpperRight().getUpperRight(), square.getUpperRight()));
+                break;
             }
+            t = t.getLowerRight();
         }
-        if (square.getLowerLeft() != null) {
+        t = square.getLowerLeft();
+        while (t != null) {
             if (square.getLowerLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerLeft()));
             } else if (square.getLowerLeft().getLowerLeft().getFigure().getTeam() != this.color && square.getLowerLeft().getLowerLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerLeft().getLowerLeft(), square.getLowerLeft()));
+                break;
             }
+            t = t.getLowerLeft();
         }
-        if (square.getLowerRight() != null) {
+        t = square.getLowerRight();
+        while (t!= null) {
             if (square.getLowerRight().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerRight()));
             } else if (square.getLowerRight().getLowerRight().getFigure().getTeam() != this.color && square.getLowerRight().getLowerRight().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerRight().getLowerRight(), square.getLowerRight()));
+                break;
             }
+            t = t.getLowerRight();
         }
-        return null;
+        return linkedList;
     }
 
     @Override

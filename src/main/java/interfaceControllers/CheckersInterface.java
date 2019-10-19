@@ -1,6 +1,7 @@
 package interfaceControllers;
 
 import mainLogic.Move;
+import mainLogic.Players;
 import mainLogic.Square;
 
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class CheckersInterface implements ControllerInterface {
     }
 
     @Override
-    public void drawBoard(boolean side) {
+    public void drawBoard(Players side) {
         if (frame == null) {
             myPanel = new JPanel();
             frame = new JFrame();
@@ -52,7 +53,7 @@ public class CheckersInterface implements ControllerInterface {
     }
 
     @Override
-    public void updateBoard(boolean side) {
+    public void updateBoard(Players side) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 jButtons[i][j].setBackground(board[i][j].getColor());

@@ -1,10 +1,7 @@
 package interfaceControllers;
 
 import figures.Figure;
-import mainLogic.BoardState;
-import mainLogic.Move;
-import mainLogic.Square;
-import mainLogic.WrongMoveException;
+import mainLogic.*;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -30,11 +27,10 @@ public class ConsoleInterface implements ControllerInterface {
     }
 
     @Override
-    public void drawBoard(boolean side) {
+    public void drawBoard(Players side) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
-                //todo mb change
                 sb.append(board[i][j].getSymbol());
             }
             sb.append("\n");
@@ -43,7 +39,7 @@ public class ConsoleInterface implements ControllerInterface {
     }
 
     @Override
-    public void updateBoard(boolean side) {
+    public void updateBoard(Players side) {
         drawBoard(side);
     }
 

@@ -1,32 +1,34 @@
 package mainLogic;
 
-import interfaceControllers.CheckersInterface;
 import interfaceControllers.ConsoleInterface;
 import interfaceControllers.ControllerInterface;
+
+import java.util.LinkedList;
 
 public class GameSession {
     private SessionType sessionType;
     private Board mainBoard;
-    private boolean whomMove;//todo make linked list
+    private LinkedList<Players> whomMove = new LinkedList<Players>();//todo make linked list
     private boolean isInterfaceEnabled = true;
+    private ControllerInterface controllerInterface;
 
     public GameSession(SessionType sessionType) {
         this.sessionType = SessionType.PVP;
+        for (Players p:Players.values()
+             ) {
+            if(p!=Players.NOONE)
+                whomMove.addFirst(p);
+        }
         mainBoard = new Board(8, 8);
-        ControllerInterface controllerInterface = new CheckersInterface(mainBoard.getField());
         ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard.getField());
-        CheckersInterface checkersInterface = new CheckersInterface(mainBoard.getField());
-        checkersInterface.drawBoard(true);
         BoardState boardState = null;
-        consoleInterface.drawBoard(true);
+        consoleInterface.drawBoard(whomMove.peek());
         do {
             try {
-                boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove));
-                //boardState = mainBoard.makeHumanMove(checkersInterface.parseMove().setWhomMove(whomMove));
+                boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove.peek()));
                 if (!boardState.suspendPlayerChange)//change player if needed
-                    whomMove = !whomMove;
-                consoleInterface.drawBoard(whomMove);
-                checkersInterface.drawBoard(whomMove);
+                    whomMove.add(whomMove.poll());
+                consoleInterface.drawBoard(whomMove.peek());
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             }

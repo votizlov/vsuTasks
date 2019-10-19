@@ -1,7 +1,9 @@
 package mainLogic;
 
+import javafx.print.PageLayout;
+
 public class Move {
-    private boolean isWhomMove;
+    private Players isWhomMove;
     private Square s1;
     private Square s2;
     private Square killedFigureSquare;
@@ -18,11 +20,11 @@ public class Move {
         this.killedFigureSquare = killedFigureSquare;
     }
 
-    public boolean isWhomMove() {
+    public Players isWhomMove() {
         return isWhomMove;
     }
 
-    public Move setWhomMove(boolean whomMove) {
+    public Move setWhomMove(Players whomMove) {
         isWhomMove = whomMove;
         return this;
     }

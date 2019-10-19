@@ -14,7 +14,7 @@ public class Board {
     private Figure[] moveProcessors;
 
     Board(int x, int y) {
-        moveProcessors = new Figure[]{new Man(true), new Man(false), new King(true), new King(false)};
+        moveProcessors = new Figure[]{new Man(Players.WHITE), new Man(Players.BLACK), new King(Players.WHITE), new King(Players.BLACK)};
         field = new Square[x][y];
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
@@ -67,6 +67,9 @@ public class Board {
             throw new WrongMoveException("You must kill");
         }
         move(move);
+        if (isBecameKing(move)){
+            move.getS2().setFigure(new King(move.getS2().getFigure().getTeam()));
+        }
         if (move.getKilledFigureSquare() != null) {
             removeChecker(move.getKilledFigureSquare());
             if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
@@ -78,8 +81,17 @@ public class Board {
         return new BoardState(false, Players.NOONE);//if move with this figure still available lock figure and dont change
     }
 
+    private boolean isBecameKing(Move move) {
+        if(move.isWhomMove()==Players.WHITE&&move.getS2().getUpperRight()==null&&move.getS2().getUpperLeft()==null){
+            return true;
+        }else if(move.isWhomMove()==Players.BLACK&&move.getS2().getLowerRight()==null&&move.getS2().getLowerLeft()==null){
+            return true;
+        }
+        return false;
+    }
+
     public BoardState makeAIMove(Move move) {
-        BoardState boardState = new BoardState("gay");
+        BoardState boardState = new BoardState("not implemented");
         return boardState;
     }
 

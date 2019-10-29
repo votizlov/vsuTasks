@@ -7,23 +7,37 @@ import figures.Man;
 import java.util.LinkedList;
 
 public class Board {
-    public Square[][] getField() {
+    public Square getField() {
         return field;
     }
 
-    private Square[][] field;
+    private Square field;
     private Square lockedSquare = null;
     private Figure[] moveProcessors;
 
     Board(int x, int y) {
         moveProcessors = new Figure[]{new Man(Players.WHITE), new Man(Players.BLACK), new King(Players.WHITE), new King(Players.BLACK)};
-        field = new Square[x][y];
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field[0].length; j++) {
-                field[i][j] = new Square();
-            }
-        }
+
         boolean placeFlag = false;
+        int k = 1;
+        for (int i = 0; i < x; i++) {
+            Square prevSquare = null;
+            for (int j = 0; j < y; j+=k) {
+                Square s = new Square(i,j);
+                s.addConnection(prevSquare,ConnectionDirections.LEFT);
+                if (i < 3 && placeFlag) {
+                    s.setFigure(moveProcessors[0]);
+                } else if (i > 4 && placeFlag) {
+                    s.setFigure(moveProcessors[1]);
+                } else {
+                    s.setFigure(null);
+                }
+                prevSquare = s;
+                placeFlag = !placeFlag;
+            }
+            y = -y;
+            k = -k;
+        }
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
                 createLinks(field[i][j], i, j);

@@ -9,12 +9,12 @@ public class Move {
     private Square killedFigureSquare;
 
 
-    public Move(Square s1, Square s2){
+    public Move(Square s1, Square s2) {
         this.s1 = s1;
         this.s2 = s2;
     }
 
-    public Move(Square s1, Square s2, Square killedFigureSquare){
+    public Move(Square s1, Square s2, Square killedFigureSquare) {
         this.s1 = s1;
         this.s2 = s2;
         this.killedFigureSquare = killedFigureSquare;

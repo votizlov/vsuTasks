@@ -32,6 +32,7 @@ public class Man implements Figure {
                 linkedList.add(new Move(square, square.getUpperRight().getUpperRight(), square.getUpperRight()));
             }
         }
+
         if (square.getLowerLeft() != null) {
             if (square.getLowerLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerLeft()));

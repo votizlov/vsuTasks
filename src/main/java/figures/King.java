@@ -48,7 +48,7 @@ public class King implements Figure {
             t = t.getLowerLeft();
         }
         t = square.getLowerRight();
-        while (t!= null) {
+        while (t != null) {
             if (square.getLowerRight().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerRight()));
             } else if (square.getLowerRight().getLowerRight().getFigure().getTeam() != this.color && square.getLowerRight().getLowerRight().getFigure() == null) {
@@ -72,7 +72,7 @@ public class King implements Figure {
 
     @Override
     public char getSymbol() {
-        if(color == Players.WHITE) {
+        if (color == Players.WHITE) {
             return '1';
         } else {
             return 'I';

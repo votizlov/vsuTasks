@@ -1,28 +1,30 @@
 package mainLogic;
 
+import javafx.print.PageLayout;
+
 public class Move {
-    private boolean isWhomMove;
+    private Players isWhomMove;
     private Square s1;
     private Square s2;
     private Square killedFigureSquare;
 
 
-    public Move(Square s1, Square s2){
+    public Move(Square s1, Square s2) {
         this.s1 = s1;
         this.s2 = s2;
     }
 
-    public Move(Square s1, Square s2, Square killedFigureSquare){
+    public Move(Square s1, Square s2, Square killedFigureSquare) {
         this.s1 = s1;
         this.s2 = s2;
         this.killedFigureSquare = killedFigureSquare;
     }
 
-    public boolean isWhomMove() {
+    public Players isWhomMove() {
         return isWhomMove;
     }
 
-    public Move setWhomMove(boolean whomMove) {
+    public Move setWhomMove(Players whomMove) {
         isWhomMove = whomMove;
         return this;
     }

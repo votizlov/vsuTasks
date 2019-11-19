@@ -1,15 +1,16 @@
 package figures;
 
 import mainLogic.Move;
+import mainLogic.Players;
 import mainLogic.Square;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Man implements Figure {
-    private boolean color;
+    private Players color;
 
-    public Man(boolean color) {
+    public Man(Players color) {
         this.color = color;
     }
 
@@ -31,6 +32,7 @@ public class Man implements Figure {
                 linkedList.add(new Move(square, square.getUpperRight().getUpperRight(), square.getUpperRight()));
             }
         }
+
         if (square.getLowerLeft() != null) {
             if (square.getLowerLeft().getFigure() == null) {
                 linkedList.add(new Move(square, square.getLowerLeft()));
@@ -50,13 +52,13 @@ public class Man implements Figure {
     }
 
     @Override
-    public boolean getTeam() {
+    public Players getTeam() {
         return color;
     }
 
     @Override
     public Color getDrawable() {
-        if (color) {
+        if (color == Players.WHITE) {
             return Color.white;
         } else {
             return Color.BLACK;
@@ -65,7 +67,7 @@ public class Man implements Figure {
 
     @Override
     public char getSymbol() {
-        if (color) {
+        if (color == Players.WHITE) {
             return '0';
         } else {
             return 'O';

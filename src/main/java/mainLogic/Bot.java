@@ -1,9 +1,9 @@
 package mainLogic;
 
-public class AI {
+public class Bot {
     private Board currentBoard;
     private boolean currentSide;
-    AI() {
+    Bot() {
     }
 
     public boolean move(Board board, boolean whomMove) {

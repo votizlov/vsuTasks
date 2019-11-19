@@ -4,6 +4,8 @@ import figures.Figure;
 import figures.King;
 import figures.Man;
 
+import java.util.LinkedList;
+
 public class Board {
     public Square[][] getField() {
         return field;
@@ -14,7 +16,7 @@ public class Board {
     private Figure[] moveProcessors;
 
     Board(int x, int y) {
-        moveProcessors = new Figure[]{new Man(true), new Man(false), new King(true), new King(false)};
+        moveProcessors = new Figure[]{new Man(Players.WHITE), new Man(Players.BLACK), new King(Players.WHITE), new King(Players.BLACK)};
         field = new Square[x][y];
         for (int i = 0; i < field.length; i++) {
             for (int j = 0; j < field[0].length; j++) {
@@ -43,13 +45,13 @@ public class Board {
             square.setUpperLeft(field[i - 1][j - 1]);
         }
         if (i + 1 < field.length && j - 1 > 0) {
-            square.setUpperLeft(field[i + 1][j - 1]);
+            square.setUpperRight(field[i + 1][j - 1]);
         }
         if (i - 1 > 0 && j + 1 < field[0].length) {
-            square.setUpperLeft(field[i - 1][j + 1]);
+            square.setLowerLeft(field[i - 1][j + 1]);
         }
         if (i + 1 < field.length && j + 1 < field[0].length) {
-            square.setUpperLeft(field[i + 1][j + 1]);
+            square.setLowerRight(field[i + 1][j + 1]);
         }
     }
 
@@ -60,26 +62,47 @@ public class Board {
         if (move.getS1().getFigure().getTeam() == move.isWhomMove()) {
             throw new WrongMoveException("Wrong team");
         }
-        if (move.getS1().getFigure().getAvailableMoves(move.getS1()).contains(move)) { //if figures in the way + valid move check
+        LinkedList<Move> availableMoves = move.getS1().getFigure().getAvailableMoves(move.getS1());
+        System.out.println(availableMoves.size());
+        if (availableMoves.contains(move)) { //if figures in the way + valid move check
             throw new WrongMoveException("Wrong move");
         }
         if (isKillAvailable() && move.getKilledFigureSquare() == null) {
             throw new WrongMoveException("You must kill");
         }
         move(move);
+        if (isBecameKing(move)) {
+            //move.getS2().setFigure(new King(move.getS2().getFigure().getTeam()));
+        }
+        for (Move m : availableMoves
+        ) {
+            if (m == move) {
+                move = m;
+                break;
+            }
+        }
         if (move.getKilledFigureSquare() != null) {
             removeChecker(move.getKilledFigureSquare());
             if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
-                return new BoardState(true, Winners.NOONE);
+                return new BoardState(true, Players.NOONE);
             } else {
-                return new BoardState(false, Winners.NOONE);
+                return new BoardState(false, Players.NOONE);
             }
         }
-        return new BoardState(false, Winners.NOONE);//if move with this figure still available lock figure and dont change
+        return new BoardState(false, Players.NOONE);//if move with this figure still available lock figure and dont change
+    }
+
+    private boolean isBecameKing(Move move) {
+        if (move.isWhomMove() == Players.WHITE && move.getS2().getUpperRight() == null && move.getS2().getUpperLeft() == null) {
+            return true;
+        } else if (move.isWhomMove() == Players.BLACK && move.getS2().getLowerRight() == null && move.getS2().getLowerLeft() == null) {
+            return true;
+        }
+        return false;
     }
 
     public BoardState makeAIMove(Move move) {
-        BoardState boardState = new BoardState("gay");
+        BoardState boardState = new BoardState("not implemented");
         return boardState;
     }
 

@@ -8,15 +8,17 @@ import java.util.LinkedList;
 import static mainLogic.ConnectionDirections.UP;
 
 public class Square {
-    private Square upperLeft;
-    private Square upperRight;
-    private Square lowerLeft;
-    private Square lowerRight;
     private int x;
-    private Square upper;
-    private Square lower;
-    private Square right;
-    private Square left;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    private int y;
     private Figure figure;
     private Square[] connections = new Square[8];
 
@@ -24,11 +26,11 @@ public class Square {
         connections[getSquareIndexByDir(dir)] = s;
     }
 
-    public Square getConnection(ConnectionDirections dir){
+    public Square getConnection(ConnectionDirections dir) {
         return connections[getSquareIndexByDir(dir)];
     }
 
-    private int getSquareIndexByDir(ConnectionDirections dir){
+    private int getSquareIndexByDir(ConnectionDirections dir) {
         switch (dir) {
             case UP:
                 return 0;
@@ -51,44 +53,9 @@ public class Square {
         }
     }
 
-    public Square(int x, int y, Figure figure) {
+    public Square(int x, int y) {
         this.x = x;
         this.y = y;
-        this.figure = figure;
-    }
-
-    private int y;
-
-    public Square getUpper() {
-        return upper;
-    }
-
-    public void setUpper(Square upper) {
-        this.upper = upper;
-    }
-
-    public Square getLower() {
-        return lower;
-    }
-
-    public void setLower(Square lower) {
-        this.lower = lower;
-    }
-
-    public Square getRight() {
-        return right;
-    }
-
-    public void setRight(Square right) {
-        this.right = right;
-    }
-
-    public Square getLeft() {
-        return left;
-    }
-
-    public void setLeft(Square left) {
-        this.left = left;
     }
 
     Square(Figure figure) {
@@ -97,22 +64,6 @@ public class Square {
 
     Square() {
         this.figure = null;
-    }
-
-    public Square getUpperLeft() {
-        return upperLeft;
-    }
-
-    public Square getUpperRight() {
-        return upperRight;
-    }
-
-    public Square getLowerLeft() {
-        return lowerLeft;
-    }
-
-    public Square getLowerRight() {
-        return lowerRight;
     }
 
     public Figure getFigure() {
@@ -129,22 +80,6 @@ public class Square {
         } else {
             return figure.getSymbol();
         }
-    }
-
-    public void setUpperLeft(Square upperLeft) {
-        this.upperLeft = upperLeft;
-    }
-
-    public void setUpperRight(Square upperRight) {
-        this.upperRight = upperRight;
-    }
-
-    public void setLowerLeft(Square lowerLeft) {
-        this.lowerLeft = lowerLeft;
-    }
-
-    public void setLowerRight(Square lowerRight) {
-        this.lowerRight = lowerRight;
     }
 
     public Color getColor() {

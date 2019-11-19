@@ -89,4 +89,8 @@ public class Square {
             return figure.getDrawable();
         }
     }
+
+    public Square[] getConnections() {
+        return  connections;
+    }
 }

@@ -22,9 +22,9 @@ public class Board {
         int k = 1;
         for (int i = 0; i < x; i++) {
             Square prevSquare = null;
-            for (int j = 0; j < y; j+=k) {
-                Square s = new Square(i,j);
-                s.addConnection(prevSquare,ConnectionDirections.LEFT);
+            for (int j = 0; j < y; j += k) {
+                Square s = new Square(i, j);
+                s.addConnection(prevSquare, ConnectionDirections.LEFT);
                 if (i < 3 && placeFlag) {
                     s.setFigure(moveProcessors[0]);
                 } else if (i > 4 && placeFlag) {
@@ -107,9 +107,9 @@ public class Board {
     }
 
     private boolean isBecameKing(Move move) {
-        if (move.isWhomMove() == Players.WHITE && move.getS2().getUpperRight() == null && move.getS2().getUpperLeft() == null) {
+        if (move.isWhomMove() == Players.WHITE && move.getS2().getConnection(ConnectionDirections.UP_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.UP_LEFT) == null) {
             return true;
-        } else if (move.isWhomMove() == Players.BLACK && move.getS2().getLowerRight() == null && move.getS2().getLowerLeft() == null) {
+        } else if (move.isWhomMove() == Players.BLACK && move.getS2().getConnection(ConnectionDirections.DOWN_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.DOWN_LEFT) == null) {
             return true;
         }
         return false;
@@ -145,5 +145,30 @@ public class Board {
             }
         }
         return false;
+    }
+
+    private Square getSquareByCoord(int i, int j) {
+        if (field.getX() == i && field.getY() == j)
+            return field;
+        else {
+            LinkedList<Square> path = new LinkedList<>();
+            path.add(field);
+            for (Square s : field.getConnections()
+            ) {
+                return visit(i, j, s,path);
+            }
+            return null;
+        }
+    }
+
+    private Square visit(int i, int j, Square s,LinkedList<Square> path) {
+        if (s.getX() == i && s.getY() == j)
+            return s;
+        else
+            for (Square s1 : s.getConnections()
+            ) {
+                return visit(i, j, s1);
+            }
+        return null;
     }
 }

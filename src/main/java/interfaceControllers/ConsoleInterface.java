@@ -5,8 +5,8 @@ import mainLogic.*;
 
 import java.util.HashMap;
 import java.util.Scanner;
-
-public class ConsoleInterface implements ControllerInterface {
+@Deprecated
+public class ConsoleInterface extends MoveEmitter {
     private HashMap<String, Square> stringSquareHashMap;
     private Scanner scanner;
     private Square[][] board;
@@ -26,7 +26,6 @@ public class ConsoleInterface implements ControllerInterface {
         System.out.println(args);
     }
 
-    @Override
     public void drawBoard(Players side) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < board.length; i++) {
@@ -38,12 +37,10 @@ public class ConsoleInterface implements ControllerInterface {
         System.out.print(sb.toString());
     }
 
-    @Override
     public void updateBoard(Players side) {
         drawBoard(side);
     }
 
-    @Override
     public Move parseMove() {
         System.out.println("MOVE");
         String[] coordinates = scanner.nextLine().split(" ");

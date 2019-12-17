@@ -1,7 +1,6 @@
 package interfaceControllers;
 
 import mainLogic.Move;
-import mainLogic.Players;
 import mainLogic.Square;
 
 import javax.swing.*;
@@ -9,7 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CheckersInterface implements ControllerInterface {
+import static mainLogic.SquareUtil.toArray;
+
+public class CheckersInterface extends MoveEmitter {
     private static JPanel myPanel;
     private static JFrame frame;
     private final Square[][] board;
@@ -17,12 +18,12 @@ public class CheckersInterface implements ControllerInterface {
     private Square firstSquare;
     private Move move;
 
-    public CheckersInterface(Square[][] board) {
-        this.board = board;
+    public CheckersInterface(Square board) {
+        this.board = toArray(board);
     }
 
     @Override
-    public void drawBoard(Players side) {
+    public void drawBoard() {
         if (frame == null) {
             myPanel = new JPanel();
             frame = new JFrame();
@@ -52,8 +53,7 @@ public class CheckersInterface implements ControllerInterface {
     private void buttonPressed(JButton source) {
     }
 
-    @Override
-    public void updateBoard(Players side) {
+    public void updateBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 jButtons[i][j].setBackground(board[i][j].getColor());
@@ -61,7 +61,6 @@ public class CheckersInterface implements ControllerInterface {
         }
     }
 
-    @Override
     public Move parseMove() throws InterruptedException {
         return move;
     }
@@ -77,6 +76,7 @@ public class CheckersInterface implements ControllerInterface {
                             firstSquare = board[i1][j1];
                         } else {
                             move = new Move(firstSquare, board[i1][j1]);
+                            onMove(move);
                             firstSquare = null;
                         }
                 }

@@ -2,42 +2,57 @@ package mainLogic;
 
 import interfaceControllers.CheckersInterface;
 import interfaceControllers.ConsoleInterface;
-import interfaceControllers.ControllerInterface;
+import interfaceControllers.InputListener;
+import interfaceControllers.MoveEmitter;
 
 import java.util.LinkedList;
 
-public class GameSession {
+public class GameSession implements InputListener {
     private SessionType sessionType;
     private Board mainBoard;
-    private LinkedList<Players> whomMove = new LinkedList<Players>();
+    private LinkedList<Player> whomMove = new LinkedList<Player>();
     private boolean isInterfaceEnabled = true;
-    private ControllerInterface controllerInterface;
+    private MoveEmitter controllerInterface;
+    BoardState boardState = null;
 
     public GameSession(SessionType sessionType) {
-        this.sessionType = SessionType.PVP;
-        for (Players p : Players.values()
-        ) {
-            if (p != Players.NOONE)
-                whomMove.addFirst(p);
-        }
+        this.sessionType = sessionType;
         mainBoard = new Board(8, 8);
-        ConsoleInterface consoleInterface = new ConsoleInterface(mainBoard.getField());
-        CheckersInterface checkersInterface = new CheckersInterface(mainBoard.getField());
+        switch (sessionType){
+            case EVE:;
+            break;
+            case PVE:;
+            break;
+            case PVP:;
+            break;
+            case ONLINE_PVP:;
+            break;
+        }
+
+        MoveEmitter checkersInterface = new CheckersInterface(mainBoard.getField());
         checkersInterface.drawBoard(whomMove.peek());
-        BoardState boardState = null;
         do {
             try {
-                consoleInterface.drawBoard(whomMove.peek());
                 boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove.peek()));
                 if (!boardState.suspendPlayerChange)//change player if needed
                     whomMove.add(whomMove.poll());
-                consoleInterface.drawBoard(whomMove.peek());
                 checkersInterface.drawBoard(whomMove.peek());
             } catch (WrongMoveException e) {
                 e.printStackTrace();
             }
-        } while (boardState == null || boardState.whoWins == Players.NOONE);
-        consoleInterface.print(boardState.whoWins.toString());
+        } while (boardState == null || boardState.whoWins == Player.NOONE);
+    }
+    @Override
+    public void move(Move move){
+        try {
+            if(whomMove == )
+            boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove.peek()));
+            if (!boardState.suspendPlayerChange)//change player if needed
+                whomMove.add(whomMove.poll());
+            checkersInterface.drawBoard(whomMove.peek());
+        } catch (WrongMoveException e) {
+            e.printStackTrace();
+        }
     }
 
     private void startNewGame() {

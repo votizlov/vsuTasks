@@ -1,6 +1,6 @@
 package mainLogic;
 
-public enum Players {
+public enum Colors {
     WHITE,
     BLACK,
     NOONE

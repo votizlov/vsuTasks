@@ -16,13 +16,13 @@ public class Board {
     private Figure[] moveProcessors;
 
     Board(int x, int y) {
-        moveProcessors = new Figure[]{new Man(Players.WHITE), new Man(Players.BLACK), new King(Players.WHITE), new King(Players.BLACK)};
+        moveProcessors = new Figure[]{new Man(Colors.WHITE), new Man(Colors.BLACK), new King(Colors.WHITE), new King(Colors.BLACK)};
 
         boolean placeFlag = false;
         int k = 1;
-        for (int i = 0; i < x; i++) {
+        for (int i = 0; i < y; i++) {
             Square prevSquare = null;
-            for (int j = 0; j < y; j += k) {
+            for (int j = 0; j < x; j += k) {
                 Square s = new Square(i, j);
                 s.addConnection(prevSquare, ConnectionDirections.LEFT);
                 if (i < 3 && placeFlag) {
@@ -69,7 +69,7 @@ public class Board {
         }
     }
 
-    public BoardState makeHumanMove(Move move) throws WrongMoveException {
+    public void makeHumanMove(Move move) throws WrongMoveException {
         if (move.getS1() == null || move.getS2() == null) {
             throw new WrongMoveException("Wrong move");
         }
@@ -97,13 +97,13 @@ public class Board {
         }
         if (move.getKilledFigureSquare() != null) {
             removeChecker(move.getKilledFigureSquare());
-            if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
+            /*if (move.getS2().getFigure().getAvailableMoves(move.getS2()).size() != 0) {
                 return new BoardState(true, Players.NOONE);
             } else {
                 return new BoardState(false, Players.NOONE);
-            }
+            }*/
         }
-        return new BoardState(false, Players.NOONE);//if move with this figure still available lock figure and dont change
+       // return new BoardState(false, Players.NOONE);//if move with this figure still available lock figure and dont change
     }
 
     private boolean isBecameKing(Move move) {
@@ -115,9 +115,9 @@ public class Board {
         return false;
     }
 
-    public BoardState makeAIMove(Move move) {
-        BoardState boardState = new BoardState("not implemented");
-        return boardState;
+    public void makeAIMove(Move move) {
+        if (move.getKilledFigureSquare() != null)
+            removeChecker(move.getKilledFigureSquare());
     }
 
     private void move(Move move) {
@@ -126,8 +126,11 @@ public class Board {
         move.getS2().setFigure(temp);
     }
 
-    private void removeChecker(Square square) {
-        square.setFigure(null);
+    private void removeChecker(LinkedList<Square> square) {
+        for (Square s:square
+             ) {
+            s.setFigure(null);
+        }
     }
 
     private boolean isKillAvailable() {
@@ -167,7 +170,8 @@ public class Board {
         else
             for (Square s1 : s.getConnections()
             ) {
-                return visit(i, j, s1);
+                path.add(s1);
+                return visit(i, j, s1,path);
             }
         return null;
     }

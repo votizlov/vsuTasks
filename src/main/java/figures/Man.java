@@ -1,5 +1,6 @@
 package figures;
 
+import mainLogic.Colors;
 import mainLogic.Move;
 import mainLogic.Players;
 import mainLogic.Square;
@@ -10,7 +11,7 @@ import java.util.LinkedList;
 public class Man implements Figure {
     private Players color;
 
-    public Man(Players color) {
+    public Man(Colors color) {
         this.color = color;
     }
 

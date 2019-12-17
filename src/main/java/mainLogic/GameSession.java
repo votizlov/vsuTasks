@@ -13,13 +13,14 @@ public class GameSession implements InputListener {
     private LinkedList<Player> whomMove = new LinkedList<Player>();
     private boolean isInterfaceEnabled = true;
     private MoveEmitter controllerInterface;
-    BoardState boardState = null;
+    private Bot bot;
 
     public GameSession(SessionType sessionType) {
         this.sessionType = sessionType;
         mainBoard = new Board(8, 8);
         switch (sessionType){
-            case EVE:;
+            case EVE:Bot bot = new Bot();
+
             break;
             case PVE:;
             break;
@@ -30,28 +31,21 @@ public class GameSession implements InputListener {
         }
 
         MoveEmitter checkersInterface = new CheckersInterface(mainBoard.getField());
-        checkersInterface.drawBoard(whomMove.peek());
-        do {
-            try {
-                boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove.peek()));
-                if (!boardState.suspendPlayerChange)//change player if needed
-                    whomMove.add(whomMove.poll());
-                checkersInterface.drawBoard(whomMove.peek());
-            } catch (WrongMoveException e) {
-                e.printStackTrace();
-            }
-        } while (boardState == null || boardState.whoWins == Player.NOONE);
+        checkersInterface.drawBoard();
     }
     @Override
     public void move(Move move){
-        try {
-            if(whomMove == )
-            boardState = mainBoard.makeHumanMove(consoleInterface.parseMove().setWhomMove(whomMove.peek()));
-            if (!boardState.suspendPlayerChange)//change player if needed
-                whomMove.add(whomMove.poll());
-            checkersInterface.drawBoard(whomMove.peek());
-        } catch (WrongMoveException e) {
-            e.printStackTrace();
+        if (whomMove.peek().getType()==playerType.BOT){
+            mainBoard.makeAIMove(bot.move(mainBoard,whomMove.peek()));
+            whomMove.addLast(whomMove.poll());
+        } else {
+            try {
+                mainBoard.makeHumanMove(move);
+                controllerInterface.drawBoard();
+                whomMove.addLast(whomMove.poll());
+            } catch (WrongMoveException e) {
+                e.printStackTrace();
+            }
         }
     }
 

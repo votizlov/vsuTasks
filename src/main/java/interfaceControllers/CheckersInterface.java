@@ -46,7 +46,7 @@ public class CheckersInterface extends MoveEmitter {
                 }
             }
         } else {
-            updateBoard(side);
+            updateBoard();
         }
     }
 

@@ -1,7 +1,7 @@
 package figures;
 
+import mainLogic.Colors;
 import mainLogic.Move;
-import mainLogic.Players;
 import mainLogic.Square;
 
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public interface Figure {
     public LinkedList<Move> getAvailableMoves(Square square);
-    public Players getTeam();
+    public Colors getTeam();
     public Color getDrawable();
     public char getSymbol();
 }

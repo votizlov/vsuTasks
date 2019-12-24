@@ -2,14 +2,13 @@ package figures;
 
 import mainLogic.Colors;
 import mainLogic.Move;
-import mainLogic.Players;
 import mainLogic.Square;
 
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Man implements Figure {
-    private Players color;
+    private Colors color;
 
     public Man(Colors color) {
         this.color = color;
@@ -53,13 +52,13 @@ public class Man implements Figure {
     }
 
     @Override
-    public Players getTeam() {
+    public Colors getTeam() {
         return color;
     }
 
     @Override
     public Color getDrawable() {
-        if (color == Players.WHITE) {
+        if (color == Colors.WHITE) {
             return Color.white;
         } else {
             return Color.BLACK;
@@ -68,7 +67,7 @@ public class Man implements Figure {
 
     @Override
     public char getSymbol() {
-        if (color == Players.WHITE) {
+        if (color == Colors.WHITE) {
             return '0';
         } else {
             return 'O';

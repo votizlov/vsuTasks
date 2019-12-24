@@ -5,7 +5,7 @@ import javafx.print.PageLayout;
 import java.util.LinkedList;
 
 public class Move {
-    private Players isWhomMove;
+    private Colors isWhomMove;
     private Square s1;
     private Square s2;
     private LinkedList<Square> killedFigureSquare;
@@ -22,11 +22,11 @@ public class Move {
         this.killedFigureSquare = killedFigureSquare;
     }
 
-    public Players isWhomMove() {
+    public Colors isWhomMove() {
         return isWhomMove;
     }
 
-    public Move setWhomMove(Players whomMove) {
+    public Move setWhomMove(Colors whomMove) {
         isWhomMove = whomMove;
         return this;
     }

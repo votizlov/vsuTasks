@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class King implements Figure {
-    private Players color;
+    private Colors color;
 
     public King(Colors color) {
         this.color = color;
@@ -62,7 +62,7 @@ public class King implements Figure {
     }
 
     @Override
-    public Players getTeam() {
+    public Colors getTeam() {
         return color;
     }
 
@@ -73,7 +73,7 @@ public class King implements Figure {
 
     @Override
     public char getSymbol() {
-        if (color == Players.WHITE) {
+        if (color == Colors.WHITE) {
             return '1';
         } else {
             return 'I';

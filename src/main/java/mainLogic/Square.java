@@ -93,4 +93,32 @@ public class Square {
     public Square[] getConnections() {
         return  connections;
     }
+
+    public void setUpperLeft(Square squareByCoord) {
+    }
+
+    public void setUpperRight(Square squareByCoord) {
+    }
+
+    public void setLowerLeft(Square squareByCoord) {
+    }
+
+    public void setLowerRight(Square squareByCoord) {
+    }
+
+    public Square getUpperRight() {
+        return null;
+    }
+
+    public Square getUpperLeft() {
+        return null;
+    }
+
+    public Square getLowerRight() {
+        return null;
+    }
+
+    public Square getLowerLeft() {
+        return null;
+    }
 }

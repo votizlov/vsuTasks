@@ -1,7 +1,7 @@
 package mainLogic;
 
 public enum Colors {
-    WHITE,
-    BLACK,
+    WHITE_TEAM,
+    BLACK_TEAM,
     NOONE
 }

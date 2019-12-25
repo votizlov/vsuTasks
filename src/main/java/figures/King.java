@@ -72,7 +72,7 @@ public class King implements Figure {
 
     @Override
     public char getSymbol() {
-        if (color == Colors.WHITE) {
+        if (color == Colors.WHITE_TEAM) {
             return '1';
         } else {
             return 'I';

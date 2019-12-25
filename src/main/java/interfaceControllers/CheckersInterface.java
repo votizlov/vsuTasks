@@ -67,7 +67,7 @@ public class CheckersInterface extends MoveEmitter {
                 public void actionPerformed(ActionEvent e) {
                     JFileChooser fileChooser = new JFileChooser();
                     JFrame d = new JFrame();
-                    if (fileChooser.showOpenDialog(d) ==JFileChooser.APPROVE_OPTION){
+                    if (fileChooser.showOpenDialog(d) == JFileChooser.APPROVE_OPTION) {
                         File file = fileChooser.getSelectedFile();
                         onLoad(file.getAbsolutePath());
                     }
@@ -76,7 +76,7 @@ public class CheckersInterface extends MoveEmitter {
             b1.setText("Load");
             myPanel1.add(b1);
             b1 = new JButton();
-                    b1.addActionListener(new ActionListener() {
+            b1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JFileChooser fileChooser = new JFileChooser();

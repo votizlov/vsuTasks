@@ -34,7 +34,7 @@ public class Board {
     }
 
     Board(int x, int y) {
-        moveProcessors = new Figure[]{new Man(Colors.WHITE), new Man(Colors.BLACK), new King(Colors.WHITE), new King(Colors.BLACK)};
+        moveProcessors = new Figure[]{new Man(Colors.WHITE_TEAM), new Man(Colors.BLACK_TEAM), new King(Colors.WHITE_TEAM), new King(Colors.BLACK_TEAM)};
         squareN = x * y;
         this.x = x;
         this.y = y;
@@ -127,9 +127,9 @@ public class Board {
     }
 
     private boolean isBecameKing(Move move) {
-        if (move.isWhomMove() == Colors.WHITE && move.getS2().getConnection(ConnectionDirections.UP_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.UP_LEFT) == null) {
+        if (move.isWhomMove() == Colors.WHITE_TEAM && move.getS2().getConnection(ConnectionDirections.UP_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.UP_LEFT) == null) {
             return true;
-        } else if (move.isWhomMove() == Colors.BLACK && move.getS2().getConnection(ConnectionDirections.DOWN_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.DOWN_LEFT) == null) {
+        } else if (move.isWhomMove() == Colors.BLACK_TEAM && move.getS2().getConnection(ConnectionDirections.DOWN_RIGHT) == null && move.getS2().getConnection(ConnectionDirections.DOWN_LEFT) == null) {
             return true;
         }
         return false;

@@ -1,6 +1,10 @@
 package mainLogic;
 
 public class Player {
+    public Colors getColor() {
+        return color;
+    }
+
     private Colors color;
 
     public playerType getType() {

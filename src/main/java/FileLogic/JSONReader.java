@@ -6,13 +6,19 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class JSONReader {
+public class JSONReader extends FileEmitter implements Runnable {
     ObjectMapper objectMapper = new ObjectMapper();
+    private GameState gameState;
 
-    public static GameState loadGame(String path) throws Exceptions.WrongFileException {
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    private String path;
+
+    private GameState loadGame(String path) throws Exceptions.WrongFileException {
         GameState state = null;
 
         try {
@@ -22,15 +28,22 @@ public class JSONReader {
             jp.setCodec(new ObjectMapper());
             jp.nextToken();
             if (!jp.hasCurrentToken())
-                throw new Exceptions.WrongFileException("Поезда тут нет!");
-
+                throw new Exceptions.WrongFileException("Неверный файл сохранения!");
             state = jp.readValueAs(GameState.class);
-            jp.nextToken();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            this.gameState = state;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return state;
+    }
+
+    @Override
+    public void run() {
+        try {
+            loadGame(path);
+            onFileLoaded(gameState);
+        } catch (Exceptions.WrongFileException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class GameState {
-    private HashSet<Square> squares = new HashSet<>();
-    private LinkedList<Player> whomMove = new LinkedList<Player>();
+    private LinkedList<Player> whomMove;
+    private HashSet<Square> squares;
     private SessionType sessionType;
 
     public GameState(HashSet<Square> squares, LinkedList<Player> whomMove, SessionType sessionType) {

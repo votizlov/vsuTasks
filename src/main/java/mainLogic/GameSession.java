@@ -1,9 +1,6 @@
 package mainLogic;
 
-import FileLogic.Exceptions;
-import FileLogic.GameState;
-import FileLogic.JSONReader;
-import FileLogic.JSONWriter;
+import FileLogic.*;
 import interfaceControllers.CheckersInterface;
 import interfaceControllers.ConsoleInterface;
 import interfaceControllers.InputListener;
@@ -12,11 +9,10 @@ import interfaceControllers.MoveEmitter;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.LinkedList;
 
-import static FileLogic.JSONReader.loadGame;
-
-public class GameSession implements InputListener {
+public class GameSession implements InputListener, FileListener {
     private SessionType sessionType;
     private Board mainBoard;
     private LinkedList<Player> whomMove = new LinkedList<Player>();
@@ -37,8 +33,8 @@ public class GameSession implements InputListener {
             case ONLINE_PVP:;
             break;
         }
-        whomMove.add(new Player(Colors.WHITE,playerType.HUMAN));
-        whomMove.add(new Player(Colors.BLACK,playerType.HUMAN));
+        whomMove.add(new Player(Colors.WHITE_TEAM,playerType.HUMAN));
+        whomMove.add(new Player(Colors.BLACK_TEAM,playerType.HUMAN));
 
         MoveEmitter checkersInterface = new CheckersInterface(mainBoard.getField(),mainBoard.getX(),mainBoard.getY());
         checkersInterface.addMoveListener(this);
@@ -98,11 +94,14 @@ public class GameSession implements InputListener {
     @Override
     public void load(String path) {
         if(path!=null){
-            try {
-                new GameSession(loadGame(path));
-            } catch (Exceptions.WrongFileException e) {
-                e.printStackTrace();
-            }
+            JSONReader reader = new JSONReader();
+            reader.setPath(path);
+            reader.run();
         }
+    }
+
+    @Override
+    public void onFileLoaded(GameState gameState) {
+        new GameSession(gameState);
     }
 }

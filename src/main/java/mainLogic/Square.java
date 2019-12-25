@@ -121,4 +121,16 @@ public class Square {
     public Square getLowerLeft() {
         return null;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setConnections(Square[] connections) {
+        this.connections = connections;
+    }
 }

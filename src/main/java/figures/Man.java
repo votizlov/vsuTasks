@@ -58,7 +58,7 @@ public class Man implements Figure {
 
     @Override
     public Color getDrawable() {
-        if (color == Colors.WHITE) {
+        if (color == Colors.WHITE_TEAM) {
             return Color.white;
         } else {
             return Color.BLACK;
@@ -67,7 +67,7 @@ public class Man implements Figure {
 
     @Override
     public char getSymbol() {
-        if (color == Colors.WHITE) {
+        if (color == Colors.WHITE_TEAM) {
             return '0';
         } else {
             return 'O';

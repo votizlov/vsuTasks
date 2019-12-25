@@ -26,7 +26,7 @@ public class ConsoleInterface extends MoveEmitter {
         System.out.println(args);
     }
 
-    public void drawBoard(Players side) {
+    public void drawBoard() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -35,10 +35,6 @@ public class ConsoleInterface extends MoveEmitter {
             sb.append("\n");
         }
         System.out.print(sb.toString());
-    }
-
-    public void updateBoard(Players side) {
-        drawBoard(side);
     }
 
     public Move parseMove() {

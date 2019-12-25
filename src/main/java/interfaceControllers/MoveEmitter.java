@@ -9,12 +9,12 @@ public abstract class MoveEmitter {
     private Set<InputListener> listeners = new HashSet<>();
 
 
-    public void addRepaintListener(InputListener listener) {
+    public void addMoveListener(InputListener listener) {
         listeners.add(listener);
     }
 
 
-    public void removeRepaintListener(InputListener listener) {
+    public void removeMoveListener(InputListener listener) {
         listeners.remove(listener);
     }
 
@@ -23,5 +23,15 @@ public abstract class MoveEmitter {
     public void onMove(Move m) {
         for (InputListener cl : listeners)
             cl.move(m);
+    }
+
+    public void onSave(String path){
+        for (InputListener cl : listeners)
+            cl.save(path);
+    }
+
+    public void onLoad(String path){
+        for (InputListener cl : listeners)
+            cl.load(path);
     }
 }

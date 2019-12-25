@@ -16,7 +16,22 @@ public class Board {
     private HashSet<Square> field;
     private Square lockedSquare = null;
     private Figure[] moveProcessors;
-    private int squareN,x,y;
+    private int squareN;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    private int x;
+    private int y;
+
+    public void setField(HashSet<Square> field) {
+        this.field = field;
+    }
 
     Board(int x, int y) {
         moveProcessors = new Figure[]{new Man(Colors.WHITE), new Man(Colors.BLACK), new King(Colors.WHITE), new King(Colors.BLACK)};
@@ -26,13 +41,9 @@ public class Board {
         field = new HashSet<>();
 
         boolean placeFlag = false;
-        int k = 1;
         for (int i = 0; i < y; i++) {
-            Square prevSquare = null;
-            if (k % 2 == 0)
-                for (int j = 0; j < x; j += k) {
+                for (int j = 0; j < x; j ++) {
                     Square s = new Square(i, j);
-                    s.addConnection(prevSquare, ConnectionDirections.LEFT);
                     if (i < 3 && placeFlag) {
                         s.setFigure(moveProcessors[0]);
                     } else if (i > 4 && placeFlag) {
@@ -40,39 +51,21 @@ public class Board {
                     } else {
                         s.setFigure(null);
                     }
-                    prevSquare = s;
                     field.add(s);
                     placeFlag = !placeFlag;
                 }
-            else {
-                for (int j = 0; j < x; j += k) {
-                    Square s = new Square(i, j);
-                    s.addConnection(prevSquare, ConnectionDirections.LEFT);
-                    if (i < 3 && placeFlag) {
-                        s.setFigure(moveProcessors[0]);
-                    } else if (i > 4 && placeFlag) {
-                        s.setFigure(moveProcessors[1]);
-                    } else {
-                        s.setFigure(null);
-                    }
-                    prevSquare = s;
-                    field.add(s);
-                    placeFlag = !placeFlag;
-                }
-            }
-            y = -y;
-            k += 1;
+            placeFlag = !placeFlag;
         }
         Iterator<Square> it = field.iterator();
         Square t = null;
-        for (int i = 0; i < squareN; i++) {
+        for (int i = 0; i < squareN-1; i++) {
             t = it.next();
-            createLinks(t);
+            createLinks(t);/*
             if (i < 3 && placeFlag) {
                 t.setFigure(moveProcessors[0]);
             } else if (i > 4 && placeFlag) {
                 t.setFigure(moveProcessors[1]);
-            }
+            }*/
             placeFlag = !placeFlag;
         }
         placeFlag = !placeFlag;

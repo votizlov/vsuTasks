@@ -21,6 +21,13 @@ public class Move {
         this.s2 = s2;
         this.killedFigureSquare = killedFigureSquare;
     }
+    public Move(Square s1, Square s2, Square killedFigureSquare) {
+        this.s1 = s1;
+        this.s2 = s2;
+        if(this.killedFigureSquare==null)
+            this.killedFigureSquare = new LinkedList<>();
+        this.killedFigureSquare.add(killedFigureSquare);
+    }
 
     public Colors isWhomMove() {
         return isWhomMove;

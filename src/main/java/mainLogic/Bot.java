@@ -24,4 +24,14 @@ public class Bot implements InputListener {
     public void move(Move m) {
 
     }
+
+    @Override
+    public void save(String path) {
+
+    }
+
+    @Override
+    public void load(String path) {
+
+    }
 }

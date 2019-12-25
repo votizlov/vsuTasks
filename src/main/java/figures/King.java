@@ -2,7 +2,6 @@ package figures;
 
 import mainLogic.Colors;
 import mainLogic.Move;
-import mainLogic.Players;
 import mainLogic.Square;
 
 import java.awt.*;

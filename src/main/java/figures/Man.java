@@ -73,4 +73,14 @@ public class Man implements Figure {
             return 'O';
         }
     }
+
+    @Override
+    public void setName(String name) {
+
+    }
+
+    @Override
+    public String getName() {
+        return "Man";
+    }
 }

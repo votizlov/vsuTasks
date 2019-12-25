@@ -78,4 +78,14 @@ public class King implements Figure {
             return 'I';
         }
     }
+
+    @Override
+    public void setName(String name) {
+
+    }
+
+    @Override
+    public String getName() {
+        return "King";
+    }
 }
